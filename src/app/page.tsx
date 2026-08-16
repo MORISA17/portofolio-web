@@ -9,46 +9,63 @@ export default function Home() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    gsap.from('.hero-title', {
-      y: 50,
+    gsap.from('.hero-text', {
+      y: 40,
       opacity: 0,
       duration: 1,
-      ease: 'power3.out'
-    });
-    
-    gsap.from('.content-card', {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power2.out'
+      stagger: 0.15,
+      ease: 'power3.out',
     });
   }, { scope: container });
 
   return (
-    <main ref={container} className="min-h-screen bg-black text-white px-8 py-12">
-      <h1 className="hero-title text-6xl font-extrabold tracking-tight mb-4">
-        {portfolioData.name.toUpperCase()}
-      </h1>
-      <p className="hero-title text-xl text-gray-400 mb-12">
-        {portfolioData.title} | {portfolioData.university}
-      </p>
+    <main ref={container} className="min-h-screen bg-[#0d0d0d] text-white flex flex-col justify-between p-8 md:p-12 font-sans selection:bg-white selection:text-black">
+      
+      {/* NAVBAR */}
+      <nav className="flex justify-between items-center text-sm tracking-wide text-gray-300 border-b border-zinc-800 pb-4">
+        <span className="font-semibold text-white">Fresh Graduated | Sosiologi</span>
+        <div className="flex gap-8">
+          <a href="#home" className="hover:text-white transition-colors">Home</a>
+          <a href="#photo" className="hover:text-white transition-colors">Photo</a>
+          <a href="#about" className="hover:text-white transition-colors">About Me</a>
+          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+        </div>
+      </nav>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="content-card p-6 bg-zinc-900 rounded-xl border border-zinc-800">
-          <h2 className="text-2xl font-bold mb-4">Tentang Saya</h2>
-          <p className="text-gray-300 leading-relaxed">{portfolioData.bio}</p>
+      {/* HERO SECTION (PORTOFOLIO) */}
+      <section className="my-auto py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        {/* Teks Kiri */}
+        <div className="flex-1 space-y-6">
+          <p className="hero-text text-gray-400 text-sm tracking-widest uppercase">
+            Presented by <br />
+            <span className="text-white font-medium text-base">{portfolioData.name}</span>
+          </p>
+          
+          <h1 className="hero-text text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">
+            PORTOFOLIO
+          </h1>
+          
+          <p className="hero-text text-gray-400 text-lg max-w-lg">
+            {portfolioData.title} • {portfolioData.university}
+          </p>
         </div>
 
-        <div className="content-card p-6 bg-zinc-900 rounded-xl border border-zinc-800">
-          <h2 className="text-2xl font-bold mb-4">Hard Skills</h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-300">
-            {portfolioData.skills.hard.map((skill, idx) => (
-              <li key={idx}>{skill}</li>
-            ))}
-          </ul>
+        {/* Foto Frame Kanan */}
+        <div className="hero-text relative w-full max-w-sm aspect-[3/4] bg-zinc-800 rounded-2xl overflow-hidden border border-zinc-700 shadow-2xl flex items-center justify-center">
+          {/* Ganti src ini dengan path foto kamu di folder /public/foto.jpg */}
+          <div className="text-center p-6 text-zinc-500">
+            <span className="block text-4xl mb-2">📸</span>
+            <p className="text-sm">[ Area Foto Profil / Pasfoto ]</p>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* FOOTER BAR */}
+      <footer className="flex justify-between items-center text-xs text-zinc-500 border-t border-zinc-900 pt-4">
+        <span>TikTok @portofolio.id</span>
+        <span>Page | 01</span>
+      </footer>
+
     </main>
   );
 }
